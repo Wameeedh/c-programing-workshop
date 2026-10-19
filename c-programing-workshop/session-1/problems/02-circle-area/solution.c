@@ -9,7 +9,7 @@
 
 const float PI = 3.14159f;   /* const = value that can never change */
 
-int main(void)
+int main()
 {
     float radius;
     float area;

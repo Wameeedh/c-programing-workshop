@@ -7,7 +7,7 @@
 
 #include <stdio.h>   /* gives us printf */
 
-int main(void)
+int main()
 {
     /* printf prints whatever is between the double quotes.
      * "\n" means "move to a new line". */

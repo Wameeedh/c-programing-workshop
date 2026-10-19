@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-int main(void)
+int main()
 {
     int a, b, c;
     float average;

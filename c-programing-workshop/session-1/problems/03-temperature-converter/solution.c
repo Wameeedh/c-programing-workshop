@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-int main(void)
+int main()
 {
     float celsius;
     float fahrenheit;

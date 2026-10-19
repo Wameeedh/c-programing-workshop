@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 
-int main(void)
+int main()
 {
     int choice;
     float a, b;

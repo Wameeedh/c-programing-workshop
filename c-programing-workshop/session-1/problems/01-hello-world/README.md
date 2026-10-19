@@ -37,7 +37,7 @@ There is **no input** in this problem — the program only shows text.
 Every C program needs the same skeleton, even if it does almost nothing:
 
 1. **Bring in a library** so you can print → `#include <stdio.h>`
-2. **Write the entry point** where execution starts → `int main(void) { ... }`
+2. **Write the entry point** where execution starts → `int main() { ... }`
 3. **Print text** → `printf("...")`
 4. **Tell the operating system we finished** → `return 0;`
 
@@ -89,7 +89,7 @@ flowchart LR
 | Line in `solution.c` | What it does |
 |---|---|
 | `#include <stdio.h>` | Includes the **st**andard **i**nput/**o**utput library. `printf` lives here. |
-| `int main(void)` | The function where the program begins running. `void` means it takes no arguments. |
+| `int main()` | The function where the program begins running. The empty parentheses mean it takes no arguments. |
 | `printf("Hello, World!\n");` | Prints the text; `\n` moves to the next line. |
 | `return 0;` | Returns `0` to the system = "everything went fine". |
 | `}` | Closes `main`. |

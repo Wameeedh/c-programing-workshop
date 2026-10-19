@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 
-int main(void)
+int main()
 {
     const int SECRET = 42;   /* const: the secret never changes */
     int guess;
