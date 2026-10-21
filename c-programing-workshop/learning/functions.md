@@ -323,12 +323,15 @@ silently — a local cannot be corrupted from far away.
 
 ## 8. The Full Picture: A Tiny Program Built From Functions
 
+This is the instructor's user-sized-array pattern (Session 3, Problem 03
+onward) in a function-shaped program:
+
 ```c
 #include <stdio.h>
 
-int MAX_SIZE = 1000;                  /* global: shared max size      */
+int MAX_SIZE = 1000;                  /* global: the safety ceiling     */
 
-int sum(int arr[], int n)             /* eats an array, returns total */
+int sum(int arr[], int n)             /* eats an array, returns total   */
 {
     int total = 0;
     for (int i = 0; i < n; i++) {
@@ -337,44 +340,48 @@ int sum(int arr[], int n)             /* eats an array, returns total */
     return total;
 }
 
-float average(int arr[], int n)       /* reuses sum — again!          */
+float average(int arr[], int n)       /* reuses sum -- again!           */
 {
     return (float)sum(arr, n) / n;
 }
 
-int readCount()                       /* typed: reads + validates n   */
+int readSize()                        /* typed: reads + validates size  */
 {
-    int n;
+    int size;
     do {
-        printf("How many numbers (1-%d)? ", MAX_SIZE);
-        scanf("%d", &n);
-    } while (n <= 0 || n > MAX_SIZE);   /* global used by a machine    */
-    return n;
+        printf("Enter the size of the array (1-%d): ", MAX_SIZE);
+        scanf("%d", &size);
+    } while (size <= 0 || size > MAX_SIZE);   /* global used by a machine */
+    return size;
 }
 
-void printReport(float a)             /* void: prints, returns nothing */
+void printReport(float a)             /* void: prints, returns nothing  */
 {
     printf("Average = %.2f\n", a);
 }
 
 int main()
 {
-    int n = readCount();
+    int size = readSize();
 
-    int numbers[MAX_SIZE];            /* local, sized by the global   */
-    for (int i = 0; i < n; i++) {
+    int numbers[size];                /* sized by the USER, at runtime  */
+
+    for (int i = 0; i < size; i++) {
         printf("Number %d: ", i + 1);
         scanf("%d", &numbers[i]);
     }
 
-    printReport(average(numbers, n)); /* machines compose inline      */
+    printReport(average(numbers, size)); /* machines compose inline     */
     return 0;
 }
 ```
 
 Look at what `main` became: **read, delegate, print** — a manager, not a
-factory. Every line delegates to a named machine. This is exactly the
-style the sessions' problems build (S4 P03, P04, and the Final Task).
+factory. Every line delegates to a named machine. And notice the two
+variable names doing one job: the user's choice travels from
+`readSize` (as `size`, returned) into `main` (as `size`) and into the
+machines (as the parameter `n`). Each function names its own inputs —
+the values flow, the names stay local.
 
 ---
 

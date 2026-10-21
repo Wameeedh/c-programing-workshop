@@ -35,8 +35,9 @@ flowchart TD
 
 ## 2. The Requirements
 
-1. Ask **how many students** (`n`, validate `1 … 1000` — the global
-   `MAX_SIZE = 1000` from your solutions is the limit).
+1. Ask **how many students** — the user **sizes the array** (the
+   instructor pattern from S3 P03), validated against the global
+   ceiling `MAX_SIZE = 1000`.
 2. Read each student's **score** (`0 … 100` — reject, re-ask, repeat).
 3. Print **each student's grade** (A–F rules below).
 4. Print the class **average** (2 decimals), **highest** and **lowest**
@@ -65,7 +66,7 @@ functions in.** This table is the map:
 
 | Report card feature | You solved it in | Function you will paste |
 |---|---|---|
-| Reading `n` numbers into an array | S3 P01 | (in `main` — reuse the loop shape) |
+| Reading numbers into a user-sized array | S3 P03 | the instructor pattern (size → validate → `int arr[size]`) |
 | Score validation loop | S2 (guessing-game style) + S4 P04 | `main`'s reading loop |
 | sum of an array | S4 P03 | `int sum(int arr[], int n)` |
 | average of an array | S4 P03 | `float average(int arr[], int n)` |
@@ -170,7 +171,7 @@ a composition, like everything else.
 ```
 - 1 student                     (edge)
 - 100 students                  (edge)
-- 1000 students                 (edge — exactly the global MAX_SIZE)
+- 1000 students                 (edge — exactly the MAX_SIZE ceiling)
 - n = 0 or n = 500              (must be rejected)
 - score = -5, 101, "abc"        (must be rejected and re-asked)
 - a grade no one earned         (empty histogram row — must not crash)

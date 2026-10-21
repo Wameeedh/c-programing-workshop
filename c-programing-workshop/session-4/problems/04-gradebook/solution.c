@@ -13,6 +13,7 @@
  * Declared OUTSIDE every function, so main AND all our functions
  * (sum, average, gradeOf, ...) can see it and use it.
  * Lives for the whole program run -- global vs local, from the slides.
+ * Here MAX_SIZE is the CEILING on the user-chosen array size.
  */
 int MAX_SIZE = 1000;
 
@@ -76,19 +77,22 @@ int countAtOrAbove(int scores[], int n, float threshold)
 
 int main()
 {
-    int scores[MAX_SIZE];
-    int n;
+    int size;
 
+    /* User-sized array (instructor pattern): the students choose the size,
+       MAX_SIZE is only the ceiling */
     printf("How many students? ");
-    scanf("%d", &n);
+    scanf("%d", &size);
 
-    if (n <= 0 || n > MAX_SIZE) {
+    if (size <= 0 || size > MAX_SIZE) {
         printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 
+    int scores[size];   /* sized by the USER, at runtime */
+
     /* validating read -- Session 2's do-while, once per student */
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < size; i++) {
         int score;
         do {
             printf("Enter score for student %d (0-100): ", i + 1);
@@ -100,12 +104,13 @@ int main()
         scores[i] = score;
     }
 
-    printScoresAndGrades(scores, n);
+    printScoresAndGrades(scores, size);
 
-    float avg = average(scores, n);
+    float avg = average(scores, size);
     printf("\nClass average: %.2f\n", avg);
     printf("At or above average: %d student(s)\n",
-           countAtOrAbove(scores, n, avg));
+           countAtOrAbove(scores, size, avg));
 
     return 0;
 }
+

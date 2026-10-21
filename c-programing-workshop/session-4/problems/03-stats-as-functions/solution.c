@@ -17,6 +17,7 @@
  * can see it and use it. Lives for the whole program run.
  * This is the "global vs local variables" idea from the slides:
  * a local variable dies with its function; a global one stays.
+ * Here MAX_SIZE is the CEILING on the user-chosen array size.
  */
 int MAX_SIZE = 1000;
 
@@ -72,24 +73,28 @@ void printStatistics(int arr[], int n)
 
 int main()
 {
-    int numbers[MAX_SIZE];
-    int n;
+    int size;
 
+    /* The user picks the size -- MAX_SIZE is only the ceiling */
     printf("How many numbers? ");
-    scanf("%d", &n);
+    scanf("%d", &size);
 
-    if (n <= 0 || n > MAX_SIZE) {
+    if (size <= 0 || size > MAX_SIZE) {
         printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 
-    printf("Enter %d numbers: ", n);
-    for (int i = 0; i < n; i++) {
+    /* Sized by the USER, at runtime (instructor pattern from Session 3) */
+    int numbers[size];
+
+    printf("Enter %d numbers: ", size);
+    for (int i = 0; i < size; i++) {
         scanf("%d", &numbers[i]);
     }
 
-    /* main reads the data and delegates -- the functions do the work */
-    printStatistics(numbers, n);
+    /* main reads the data and delegates -- the functions do the work
+       (the functions receive the array and its length n = size) */
+    printStatistics(numbers, size);
 
     return 0;
 }

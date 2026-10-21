@@ -2,7 +2,8 @@
  * Problem 04 - Linear Search
  * Session 3: Arrays
  *
- * Read n numbers, then find a target:
+ * Read numbers into a user-sized array (instructor pattern from P03),
+ * then find a target:
  *  - position of the FIRST occurrence (found flag + break)
  *  - every position where it appears (counter-index pattern)
  */
@@ -13,26 +14,29 @@
  * GLOBAL VARIABLE: MAX_SIZE
  * Declared OUTSIDE every function, so every function in this file
  * can see it and use it. Lives for the whole program run.
+ * Here MAX_SIZE is the CEILING on the user-chosen size.
  */
 int MAX_SIZE = 1000;
 
 int main()
 {
-    int numbers[MAX_SIZE];
-    int positions[MAX_SIZE];   /* saves where the target appears */
-    int n;
+    int size;
     int target;
 
     printf("How many numbers? ");
-    scanf("%d", &n);
+    scanf("%d", &size);
 
-    if (n <= 0 || n > MAX_SIZE) {
+    if (size <= 0 || size > MAX_SIZE) {
         printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 
-    printf("Enter %d numbers: ", n);
-    for (int i = 0; i < n; i++) {
+    /* Sized by the USER, at runtime */
+    int numbers[size];
+    int positions[size];   /* saves where the target appears */
+
+    printf("Enter %d numbers: ", size);
+    for (int i = 0; i < size; i++) {
         scanf("%d", &numbers[i]);
     }
 
@@ -42,7 +46,7 @@ int main()
     /* ---- Part 1: first occurrence ---- */
     int foundAt = -1;   /* -1 means "not seen yet" */
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < size; i++) {
         if (numbers[i] == target) {
             foundAt = i;
             break;   /* we only need the first one */
@@ -58,7 +62,7 @@ int main()
     /* ---- Part 2: every occurrence ---- */
     int posCount = 0;
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < size; i++) {
         if (numbers[i] == target) {
             positions[posCount] = i;
             posCount++;

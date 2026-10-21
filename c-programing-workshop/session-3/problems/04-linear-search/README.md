@@ -8,7 +8,8 @@
 
 ## 1. The Problem
 
-Read `n` integers into an array, then ask for a `target` value. Search the
+Read some integers into a **user-sized** array (the pattern from
+Problem 03), then ask for a `target` value. Search the
 array and print **the position of the first occurrence**, or a message if
 the value is not there.
 
@@ -38,7 +39,8 @@ Which value do you want to find? 99
 
 ## 3. How to Think About It
 
-Linear search = walk through the array from box 0 to box n−1 and compare
+Linear search = walk through the array from box 0 to the last box and
+compare
 each box with the target. The moment you find it, you *could* stop — that
 is what we do for the first occurrence.
 
@@ -48,7 +50,7 @@ Two patterns inside the same loop:
 
 ```c
 int foundAt = -1;                       /* -1 = "not seen yet" */
-for (int i = 0; i < n; i++) {
+for (int i = 0; i < size; i++) {
     if (numbers[i] == target) { foundAt = i; break; }
 }
 ```
@@ -81,7 +83,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    S["foundAt = -1"] --> L["Loop i = 0..n-1"]
+    S["foundAt = -1"] --> L["Loop i = 0..size-1"]
     L --> Q{"arr[i] == target ?"}
     Q -- Yes --> F["foundAt = i, break"]
     Q -- No --> L
@@ -125,7 +127,7 @@ flowchart LR
 
 ## 7. Try It Yourself
 
-1. Stop early without `break` — count down from `n-1`? What changes?
+1. Stop early without `break` — count down from `size-1`? What changes?
 2. Find and report the **last** occurrence instead of the first (never
    overwrite an earlier `foundAt`, or walk from the end).
 3. Count how many times the target appears (a `found` counter instead of

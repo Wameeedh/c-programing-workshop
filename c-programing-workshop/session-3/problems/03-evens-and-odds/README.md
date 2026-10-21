@@ -8,9 +8,9 @@
 
 ## 1. The Problem
 
-Read `n` integers into an array, then split them: put the even numbers into
-one array and the odd numbers into another. Print both arrays and how many
-each one holds.
+Read some integers into a **user-sized** array, then split them: put the
+even numbers into one array and the odd numbers into another. Print both
+arrays and how many each one holds.
 
 ---
 
@@ -31,10 +31,40 @@ Odd numbers  (3): 3 7 11
 This problem is really a **sorting hat**: one by one, send each number to
 one of two tables.
 
-Three ingredients:
+**New technique first (from your instructor's pattern):** from this
+problem on, **the user sizes the array**. Instead of reserving a fixed
+`MAX_SIZE` boxes, we ask how many numbers, *validate* against the global
+`MAX_SIZE = 1000` ceiling, and create the array at that moment:
 
-1. Two extra arrays: `int evens[MAX_SIZE]; int odds[MAX_SIZE];`
-   (both sized by the **global** `MAX_SIZE = 1000` — see Problem 01).
+```c
+int size;                         /* the user decides this */
+scanf("%d", &size);
+
+if (size <= 0 || size > MAX_SIZE) { /* the ceiling guards it */
+    printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
+    return 1;
+}
+
+int numbers[size];                /* the USER chose the number of boxes */
+```
+
+Three things to notice:
+
+1. `int numbers[size];` with a **runtime variable** is legal standard C —
+   the array comes into existence the moment the program knows its size.
+2. **Order matters**: the declaration must come **after** `scanf` — C
+   cannot create an array whose size nobody knows yet.
+3. The global `MAX_SIZE` changed jobs: it is no longer the array itself —
+   it is the **ceiling** that protects the user from absurd sizes.
+
+(Problem 01's *Level-Up Preview* section has the full walkthrough of this
+pattern — flip back if anything here is unclear.)
+
+Three ingredients for the sorting hat itself:
+
+1. Two extra arrays: `int evens[size]; int odds[size];`
+   (also user-sized — the arrays can never need more than `size` boxes,
+   so they are at most as big as the input).
 2. Two counters: `int evenCount = 0; int oddCount = 0;` — *these are the
    position counters of the new arrays.*
 3. One `for` loop over the input, with an `if/else` inside:
@@ -65,7 +95,7 @@ That is why the counters exist.
 
 ```mermaid
 flowchart TD
-    L["Loop i = 0..n-1"] --> C{"numbers[i] % 2 == 0 ?"}
+    L["Loop i = 0..size-1"] --> C{"numbers[i] % 2 == 0 ?"}
     C -- Yes --> E["evens[evenCount] = numbers[i]<br/>evenCount++"]
     C -- No --> O["odds[oddCount] = numbers[i]<br/>oddCount++"]
     E --> L
@@ -88,12 +118,12 @@ that is the whole lesson of this problem.
 
 | Line | Meaning |
 |---|---|
-| `int evens[MAX_SIZE], odds[MAX_SIZE];` | Two empty rows of boxes. |
+| `int evens[size], odds[size];` | Two empty rows of user-sized boxes. |
 | `int evenCount = 0, oddCount = 0;` | Each counter also means "how full". |
 | `numbers[i] % 2 == 0` | The even test. |
 | `evens[evenCount] = numbers[i];` | Store at the next free even box. |
 | `evenCount++;` | Move to the next free even box. |
-| `for (int i = 0; i < evenCount; i++)` | Both arrays get printed with THEIR counters, not `n`. |
+| `for (int i = 0; i < evenCount; i++)` | Both arrays get printed with THEIR counters, not `size`. |
 
 ---
 
