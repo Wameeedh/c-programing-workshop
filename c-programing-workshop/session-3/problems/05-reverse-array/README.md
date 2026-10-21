@@ -107,7 +107,7 @@ needed only for reading.
 | `int i = n - 1; i >= 0; i--` | Loop that counts **down**. |
 | `reversed[n - 1 - i]` | The mirror address of box `i`. |
 | `printf("%d ", numbers[i]);` | Dedicate one loop per sentence in the output. |
-| `int reversed[5]` | Second array — same size `MAX`, we use `n` boxes. |
+| `int reversed[MAX_SIZE]` | Second array — same size `MAX_SIZE`, we use `n` boxes. |
 
 ---
 

@@ -9,7 +9,13 @@
 
 #include <stdio.h>
 
-#define SIZE 3
+/*
+ * GLOBAL VARIABLE: SIZE
+ * Declared OUTSIDE every function, so every function in this file
+ * can see it and use it. Lives for the whole program run.
+ * (Local variables live and die inside their own function.)
+ */
+int SIZE = 3;
 
 /* ---- typed function: gives the value back ---- */
 int square(int x)

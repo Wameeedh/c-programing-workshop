@@ -8,7 +8,13 @@
 
 #include <stdio.h>
 
-#define MAX 100
+/*
+ * GLOBAL VARIABLE: MAX_SIZE
+ * Declared OUTSIDE every function, so main AND all our functions
+ * (sum, average, gradeOf, ...) can see it and use it.
+ * Lives for the whole program run -- global vs local, from the slides.
+ */
+int MAX_SIZE = 1000;
 
 /* ==================== pasted from Problem 03 (unchanged!) ============ */
 
@@ -70,14 +76,14 @@ int countAtOrAbove(int scores[], int n, float threshold)
 
 int main()
 {
-    int scores[MAX];
+    int scores[MAX_SIZE];
     int n;
 
     printf("How many students? ");
     scanf("%d", &n);
 
-    if (n <= 0 || n > MAX) {
-        printf("Please enter a value between 1 and %d.\n", MAX);
+    if (n <= 0 || n > MAX_SIZE) {
+        printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 

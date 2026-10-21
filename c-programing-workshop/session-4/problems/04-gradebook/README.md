@@ -132,6 +132,7 @@ flowchart TD
 |---|---|
 | `char gradeOf(int score)` | Returns a single character — `char` type. |
 | `return 'A';` | Character literals in single quotes `'A'`. |
+| `int MAX_SIZE = 1000;` (top of file) | **Global variable**: lives outside every function, visible to all of them, alive the whole run. |
 | `for (int i = 0; i < n; i++)` … `gradeOf(scores[i])` | One brain, every student |
 | `float avg = average(scores, n);` | Problem 03's function, pasted unchanged |
 | `if (scores[i] >= avg) above++;` | Pass 2, after the average is known |

@@ -11,7 +11,14 @@
 
 #include <stdio.h>
 
-#define MAX 100
+/*
+ * GLOBAL VARIABLE: MAX_SIZE
+ * Declared OUTSIDE every function, so main AND all our functions
+ * can see it and use it. Lives for the whole program run.
+ * This is the "global vs local variables" idea from the slides:
+ * a local variable dies with its function; a global one stays.
+ */
+int MAX_SIZE = 1000;
 
 /* ---- typed functions: one loop + one job each ---- */
 
@@ -65,14 +72,14 @@ void printStatistics(int arr[], int n)
 
 int main()
 {
-    int numbers[MAX];
+    int numbers[MAX_SIZE];
     int n;
 
     printf("How many numbers? ");
     scanf("%d", &n);
 
-    if (n <= 0 || n > MAX) {
-        printf("Please enter a value between 1 and %d.\n", MAX);
+    if (n <= 0 || n > MAX_SIZE) {
+        printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 

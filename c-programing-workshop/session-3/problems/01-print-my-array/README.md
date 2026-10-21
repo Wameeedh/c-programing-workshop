@@ -12,7 +12,7 @@ Ask the user how many numbers they want (`n`), read `n` integers into an
 array, then print each number with its index — like looking at every drawer
 and saying what's inside it.
 
-Reject `n` outside `1 … 100`.
+Reject `n` outside `1 … 1000`.
 
 ---
 
@@ -35,11 +35,25 @@ Box 4: 18
 ## 3. How to Think About It
 
 An **array** is a row of boxes of the same type, numbered from **0**.
-Before using it you must reserve all boxes at once:
+Before using it you must reserve all boxes at once, with a maximum size:
 
 ```c
-int numbers[MAX];   /* 100 boxes reserved, we use only the first n */
+int numbers[MAX_SIZE];   /* 1000 boxes reserved, we use only the first n */
 ```
+
+> New in this problem: **`MAX_SIZE` is a global variable**. It is the first
+> variable in your program to be declared *outside* every function.
+>
+> | | Global variable | Local variable |
+> |---|---|---|
+> | Declared | at the top of the file, outside `main` | inside a function |
+> | Who can see it | **every** function in the file | only that function |
+> | How long it lives | the whole program run | dies when its function ends |
+>
+> Why put the max size in a global variable? Every part of the program
+> agrees on the same limit, and if you ever change 1000 to 2000, you edit
+> **one line** — the spirit of "write once, use everywhere" applied to a
+> single number.
 
 The plan has two steps, and both need the same loop:
 
@@ -72,7 +86,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    R["Read n, validate 1..100"] --> F["Loop i = 0..n-1<br/>scanf into numbers i"]
+    R["Read n, validate 1..1000"] --> F["Loop i = 0..n-1<br/>scanf into numbers i"]
     F --> P["Loop i = 0..n-1<br/>print Box i: numbers i"]
 ```
 
@@ -93,10 +107,10 @@ we wrote `&a`; now the box is `numbers[i]`, so the address is
 
 | Line | Meaning |
 |---|---|
-| `#define MAX 100` | A named constant for the maximum array size. |
-| `int numbers[MAX];` | Reserve 100 `int` boxes (only the first `n` are used). |
+| `int MAX_SIZE = 1000;` | **Global variable**: declared outside all functions (above `main`), visible to every function, alive for the whole run. |
+| `int numbers[MAX_SIZE];` | Reserve 1000 `int` boxes (only the first `n` are used). |
 | `scanf("%d", &n);` | Read how many numbers the user has. |
-| `if (n <= 0 \|\| n > MAX)` | Bounds check: never trust the user. |
+| `if (n <= 0 \|\| n > MAX_SIZE)` | Bounds check: never trust the user. |
 | `scanf("%d", &numbers[i]);` | Fill box `i` — every element needs its own `&`. |
 | `printf("Box %d: %d\n", i, numbers[i]);` | Label each value with its index. |
 

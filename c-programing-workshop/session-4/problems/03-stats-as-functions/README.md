@@ -71,6 +71,16 @@ of pass-by-value vs pass-by-reference — do not stress over the why yet;
 your interest today is only "arrays ride into functions with their length
 glued to them". Remember the pattern and it will serve you forever.)
 
+> **Side note — `MAX_SIZE` is a global variable.** In main you will keep
+> writing `int numbers[MAX_SIZE];` where `MAX_SIZE = 1000` is declared at
+> the top of the file, *outside* every function. That is the
+> **global variable** idea from the slides: a local variable is created
+> and destroyed inside its own function, while a global one is visible to
+> **every** function and lives for the whole program run. Since every
+> function here may at some point care about the same maximum size, giving
+> it one shared global name means changing the size later = editing one
+> line. (Write once, use everywhere — even for a number.)
+
 Inside the function, `arr[i]` works exactly like `numbers[i]` did inside
 `main`. **Copy the loop bodies from your Session 3 solution — that is the
 point: learned logic is not re-solved, it is re-used.**

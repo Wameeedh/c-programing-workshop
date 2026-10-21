@@ -8,7 +8,7 @@
 
 ## 1. The Problem
 
-Read `n` integers into an array (validate `n` in `1 … 100`), then print:
+Read `n` integers into an array (validate `n` in `1 … 1000`), then print:
 
 - count
 - sum

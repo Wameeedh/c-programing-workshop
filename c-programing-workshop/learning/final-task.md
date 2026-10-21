@@ -35,7 +35,8 @@ flowchart TD
 
 ## 2. The Requirements
 
-1. Ask **how many students** (`n`, validate `1 … 100`).
+1. Ask **how many students** (`n`, validate `1 … 1000` — the global
+   `MAX_SIZE = 1000` from your solutions is the limit).
 2. Read each student's **score** (`0 … 100` — reject, re-ask, repeat).
 3. Print **each student's grade** (A–F rules below).
 4. Print the class **average** (2 decimals), **highest** and **lowest**
@@ -169,6 +170,7 @@ a composition, like everything else.
 ```
 - 1 student                     (edge)
 - 100 students                  (edge)
+- 1000 students                 (edge — exactly the global MAX_SIZE)
 - n = 0 or n = 500              (must be rejected)
 - score = -5, 101, "abc"        (must be rejected and re-asked)
 - a grade no one earned         (empty histogram row — must not crash)

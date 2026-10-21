@@ -33,7 +33,8 @@ one of two tables.
 
 Three ingredients:
 
-1. Two extra arrays: `int evens[MAX]; int odds[MAX];`
+1. Two extra arrays: `int evens[MAX_SIZE]; int odds[MAX_SIZE];`
+   (both sized by the **global** `MAX_SIZE = 1000` — see Problem 01).
 2. Two counters: `int evenCount = 0; int oddCount = 0;` — *these are the
    position counters of the new arrays.*
 3. One `for` loop over the input, with an `if/else` inside:
@@ -87,7 +88,7 @@ that is the whole lesson of this problem.
 
 | Line | Meaning |
 |---|---|
-| `int evens[MAX], odds[MAX];` | Two empty rows of boxes. |
+| `int evens[MAX_SIZE], odds[MAX_SIZE];` | Two empty rows of boxes. |
 | `int evenCount = 0, oddCount = 0;` | Each counter also means "how full". |
 | `numbers[i] % 2 == 0` | The even test. |
 | `evens[evenCount] = numbers[i];` | Store at the next free even box. |

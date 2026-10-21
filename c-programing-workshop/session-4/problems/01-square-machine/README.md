@@ -53,6 +53,12 @@ Two new rules to internalize:
    (This is *pass by value* — check the Session 4 course for details.)
 2. **A typed function must `return` on every path** through its `if`s.
 
+> **Side note:** `int SIZE = 3;` at the top of the solution is a **global
+> variable** — declared outside every function, so any function could use
+> it, and it stays alive the whole program run. A variable declared
+> *inside* a function (like `numbers` here) is a **local variable** and
+> dies when that function ends.
+
 The **mentality** switch: `main` should become less like a factory and more
 like a manager — it reads input, delegates work to machines (functions),
 and arranges the workers' results. You will reuse `square` in the next

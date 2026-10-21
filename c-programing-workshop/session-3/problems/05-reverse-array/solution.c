@@ -12,19 +12,24 @@
 
 #include <stdio.h>
 
-#define MAX 100   /* maximum size for every array */
+/*
+ * GLOBAL VARIABLE: MAX_SIZE
+ * Declared OUTSIDE every function, so every function in this file
+ * can see it and use it. Lives for the whole program run.
+ */
+int MAX_SIZE = 1000;
 
 int main()
 {
-    int numbers[MAX];
-    int reversed[MAX];
+    int numbers[MAX_SIZE];
+    int reversed[MAX_SIZE];
     int n;
 
     printf("How many numbers? ");
     scanf("%d", &n);
 
-    if (n <= 0 || n > MAX) {
-        printf("Please enter a value between 1 and %d.\n", MAX);
+    if (n <= 0 || n > MAX_SIZE) {
+        printf("Please enter a value between 1 and %d.\n", MAX_SIZE);
         return 1;
     }
 
